@@ -1,0 +1,13 @@
+matplotlib>=3.7.0
+numpy>=1.24.2
+pandas>=2.3.3
+python-dotenv>=0.20.0
+requests>=2.27.1
+scikit-learn
+seaborn>=0.12.2
+sqlalchemy>=2.0.38
+xgboost
+streamlit
+yfinance
+plotly
+ta
