@@ -1,0 +1,10 @@
+.git
+.github
+.vscode
+.devcontainer
+__pycache__/
+*.pyc
+venv/
+env/
+.env
+explore.ipynb
