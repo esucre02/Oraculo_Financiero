@@ -1,0 +1,39 @@
+name: Retrenamiento Semanal del Oráculo
+
+on:
+  schedule:
+    - cron: '0 0 * * 6'
+  # ESTO ES NUEVO: Nos permite darle al botón "Run workflow" manualmente
+  workflow_dispatch: 
+
+# ESTO ES NUEVO: Le da permiso al robot para sobrescribir el archivo .pkl
+permissions:
+  contents: write
+
+jobs:
+  entrenar:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Actualizamos a v4 para quitar la advertencia amarilla
+    - uses: actions/checkout@v4
+
+    - name: Configurar Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Instalar dependencias
+      run: pip install -r requirements.txt
+
+    - name: Entrenar Modelo
+      run: python src/retrenar_modelo.py
+
+    - name: Subir el nuevo modelo a GitHub
+      run: |
+        git config --global user.name "Robot de Retrenamiento"
+        git config --global user.email "robot@oraculo.com"
+        git add models/oraculo_financiero2_xgb.pkl
+        # El "|| true" al final evita que el proceso muera si el modelo no cambió
+        git commit -m "🤖 Modelo reentrenado y actualizado" || true
+        git push
