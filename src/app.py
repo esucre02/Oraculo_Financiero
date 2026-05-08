@@ -439,11 +439,11 @@ for i, (tk, df_data) in enumerate(datos_dict.items()):
 # Layout final corregido
 title_y = "Rendimiento Normalizado (%)" if is_comparison else f"Precio {tk} ($)"
 fig.update_layout(
-    template="plotly_dark", hovermode="x unified",
-    margin=dict(l=40, r=40, t=10, b=40),
+    template="plotly_dark", hovermode="closest",
+    margin=dict(l=10, r=10, t=30, b=100),
     xaxis=dict(showgrid=True, gridcolor="#21262d", rangeslider=dict(visible=False)),
     yaxis=dict(showgrid=True, gridcolor="#21262d", title_text=title_y),
-    height=600, legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+    height=600, legend=dict(orientation="h", yanchor="top", y=-0.15, xanchor="center", x=0.5)
 )
 
 st.plotly_chart(fig, use_container_width=True)
@@ -587,10 +587,11 @@ if mostrar_grid:
             ))
 
     fig_backtest.update_layout(
-        template="plotly_dark", height=400, 
+        template="plotly_dark", height=450, 
+        margin=dict(l=10, r=10, t=50, b=100),
         title_text="Rendimiento Acumulado de Estrategia (%)", 
         yaxis=dict(title_text="%"),
-        hovermode="x unified",
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+        hovermode="closest",
+        legend=dict(orientation="h", yanchor="top", y=-0.2, xanchor="center", x=0.5)
     )
     st.plotly_chart(fig_backtest, use_container_width=True)
